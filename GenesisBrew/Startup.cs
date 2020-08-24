@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,7 @@ namespace GenesisBrewery2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            ConfigureApplication(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +48,12 @@ namespace GenesisBrewery2
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void ConfigureApplication(IServiceCollection services)
+        {
+            services.AddTransient<IBrandService, BrandService>();
+            services.AddTransient<IWholesalerService, WholesalerService>();
         }
     }
 }
