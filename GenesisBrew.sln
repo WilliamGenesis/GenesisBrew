@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenesisBrew", "GenesisBrew\GenesisBrew.csproj", "{EFCF1898-2855-4310-A17D-19DB530A11EF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{8667C35A-FB6E-4636-86EC-D5105942D7AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUnitTests", "ApplicationUnitTests\ApplicationUnitTests.csproj", "{FFCD4A0C-D0E3-40A4-B646-C28A367869FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{EFCF1898-2855-4310-A17D-19DB530A11EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFCF1898-2855-4310-A17D-19DB530A11EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFCF1898-2855-4310-A17D-19DB530A11EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCD4A0C-D0E3-40A4-B646-C28A367869FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCD4A0C-D0E3-40A4-B646-C28A367869FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCD4A0C-D0E3-40A4-B646-C28A367869FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCD4A0C-D0E3-40A4-B646-C28A367869FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FFCD4A0C-D0E3-40A4-B646-C28A367869FD} = {8667C35A-FB6E-4636-86EC-D5105942D7AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0C3D537-9ABE-4954-BB39-D2EE8B40DB4B}

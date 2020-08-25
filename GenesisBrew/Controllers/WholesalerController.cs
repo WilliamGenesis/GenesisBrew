@@ -57,6 +57,9 @@ namespace GenesisBrew.Controllers
         [Route("UpdateStockItem")]
         public async Task<IActionResult> UpdateStockItem([FromBody] BeerStockItem stockItem)
         {
+            if (!ModelState.IsValid)
+                return new BadRequestObjectResult(ModelState);
+
             return new OkObjectResult(await _wholesalerService.UpdateStockItem(stockItem));
         }
 
