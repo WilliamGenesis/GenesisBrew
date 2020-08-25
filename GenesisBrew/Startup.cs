@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.Services;
+using Application.Validation;
+using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace GenesisBrewery2
 {
@@ -28,6 +23,7 @@ namespace GenesisBrewery2
         {
             services.AddControllers();
             ConfigureApplication(services);
+            ConfigureDataAccess(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +50,14 @@ namespace GenesisBrewery2
         {
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<IWholesalerService, WholesalerService>();
+            services.AddTransient<IBrandValidation, BrandValidation>();
+            services.AddTransient<IWholesalerValidation, WholesalerValidation>();
+        }
+
+        private void ConfigureDataAccess(IServiceCollection services)
+        {
+            services.AddTransient<IBrandDataAccess, BrandDataAccess>();
+            services.AddTransient<IWholesalerDataAccess, WholesalerDataAccess>();
         }
     }
 }
