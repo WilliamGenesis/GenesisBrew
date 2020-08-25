@@ -26,7 +26,7 @@ namespace Application.Validation
             var beer = await _brandDataAccess.GetBeer(beerId);
 
             if (beer is null)
-                throw new HttpException(HttpStatusCode.NotFound, "The beer does not exist");
+                throw new HttpException(HttpStatusCode.BadRequest, "The beer does not exist");
         }
 
         private async Task ValidateBeerBrewery(Guid breweryId)

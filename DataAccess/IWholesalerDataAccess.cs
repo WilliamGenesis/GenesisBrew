@@ -8,9 +8,9 @@ namespace DataAccess
     {
         Task<Wholesaler[]> GetWholesalers();
         Task<Wholesaler> GetWholesaler(Guid id);
-        Task<BeerStockItem> GetStockItem(Guid id);
+        Task<BeerStockItem> GetBeerStockItem(Guid id);
         Task<BeerStockItem[]> GetWholesalerStock(Guid wholesalerId);
-        Task<Wholesaler[]> GetWholesalersByItemId(Guid itemId);
+        Task<Wholesaler[]> GetWholesalersByBeerId(Guid itemId);
         Task<Guid> CreateStockItem(BeerStockItem item);
         Task<Guid> UpdateStockItem(BeerStockItem item);
     }

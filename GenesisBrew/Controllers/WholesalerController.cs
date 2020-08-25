@@ -38,7 +38,7 @@ namespace GenesisBrew.Controllers
         [Route("StockItem/{itemId}")]
         public async Task<IActionResult> GetWholesalersByItem(Guid itemId)
         {
-            return new OkObjectResult(await _wholesalerService.GetWholesalersByItem(itemId));
+            return new OkObjectResult(await _wholesalerService.GetWholesalersByBeerId(itemId));
         }
 
         [HttpPost]

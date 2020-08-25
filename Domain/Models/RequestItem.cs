@@ -2,9 +2,9 @@
 
 namespace Domain.Models
 {
-    public class BeerStockItemRequest
+    public class BeerRequest
     {
-        public Guid BeerStockItemId { get; set; }
+        public Guid BeerId { get; set; }
         public int Quantity { get; set; }
     }
 }

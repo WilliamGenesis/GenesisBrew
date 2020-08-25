@@ -8,7 +8,7 @@ namespace Application.Services
     {
         Task<Wholesaler[]> GetWholesalers();
         Task<BeerStockItem[]> GetWholesalerStock(Guid wholesalerId);
-        Task<Wholesaler[]> GetWholesalersByItem(Guid itemId);
+        Task<Wholesaler[]> GetWholesalersByBeerId(Guid itemId);
         Task<Guid> CreateStockItem(BeerStockItem item);
         Task<Guid> UpdateStockItem(BeerStockItem item);
         Task<Quote> GenerateQuote(QuoteRequest request);

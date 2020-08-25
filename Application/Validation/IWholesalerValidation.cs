@@ -6,9 +6,9 @@ namespace Application.Validation
 {
     public interface IWholesalerValidation
     {
-        Task WholesalerExists(Guid id);
-        Task StockItemExist(Guid id);
-        Task ValidateStockItem(BeerStockItem item);
+        Task ValidateWholesalerExists(Guid id);
+        Task ValidateBeerStockItemExist(Guid id);
+        Task ValidateBeerStockItem(BeerStockItem item);
         Task ValidateQuoteRequest(QuoteRequest request);
     }
 }

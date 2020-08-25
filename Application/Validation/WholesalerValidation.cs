@@ -1,29 +1,102 @@
-﻿using Domain.Models;
+﻿using DataAccess;
+using Domain.Exceptions;
+using Domain.Models;
 using System;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Application.Validation
 {
     public class WholesalerValidation : IWholesalerValidation
     {
-        public Task StockItemExist(Guid id)
+        private readonly IWholesalerDataAccess _wholesalerDataAccess;
+
+        public WholesalerValidation(IWholesalerDataAccess wholesalerDataAccess)
         {
-            throw new NotImplementedException();
+            _wholesalerDataAccess = wholesalerDataAccess;
         }
 
-        public Task ValidateQuoteRequest(QuoteRequest request)
+        public async Task ValidateBeerStockItemExist(Guid id)
         {
-            throw new NotImplementedException();
+            var beerStockItem = await _wholesalerDataAccess.GetBeerStockItem(id);
+
+            if (beerStockItem is null)
+                throw new HttpException(HttpStatusCode.BadRequest, "The beer stock item does not exist");
         }
 
-        public Task ValidateStockItem(BeerStockItem item)
+        public async Task ValidateQuoteRequest(QuoteRequest request)
         {
-            throw new NotImplementedException();
+            ValidateQuoteRequestNotEmpty(request);
+            ValidateQuoteRequestAllUnique(request);
+            await ValidateWholesalerStockForRequest(request);
         }
 
-        public Task WholesalerExists(Guid id)
+        public async Task ValidateBeerStockItem(BeerStockItem item)
         {
-            throw new NotImplementedException();
+            await ValidateWholesalerExists(item.Wholesaler?.Id ?? Guid.Empty);
+            ValidateBeerStockItemPrice(item.UnitPrice);
+            ValidateBeerStockItemQuantity(item.Quantity);
         }
+
+        public async Task ValidateWholesalerExists(Guid id)
+        {
+            var wholesaler = await _wholesalerDataAccess.GetWholesaler(id);
+
+            if(wholesaler is null)
+                throw new HttpException(HttpStatusCode.BadRequest, "The wholesaler does not exist");
+        }
+
+        #region Beer Stock Item Validation
+
+
+        private void ValidateBeerStockItemPrice(float price)
+        {
+            if( price < 0)
+                throw new HttpException(HttpStatusCode.BadRequest, "The price of a stock item cannot be negative");
+        }
+
+        private void ValidateBeerStockItemQuantity(int quantity)
+        {
+            if( quantity < 0)
+                throw new HttpException(HttpStatusCode.BadRequest, "The quantity of a stock item cannot be negative");
+        }
+
+        #endregion
+
+        #region Quote Request Validation
+
+        private void ValidateQuoteRequestNotEmpty(QuoteRequest request)
+        {
+            if (request is null || request.BeerRequests is null || request.BeerRequests.Length == 0)
+                throw new HttpException(HttpStatusCode.BadRequest, "Quote request cannot be empty");
+        }
+
+        private void ValidateQuoteRequestAllUnique(QuoteRequest request)
+        {
+            var allUnique = request.BeerRequests.GroupBy(x => x.BeerId).All(g => g.Count() == 1);
+
+            if (!allUnique)
+                throw new HttpException(HttpStatusCode.BadRequest, "All request items should be unique");
+        }
+
+        private async Task ValidateWholesalerStockForRequest(QuoteRequest request)
+        {
+            var wholesalerStock = await _wholesalerDataAccess.GetWholesalerStock(request.WholesalerId);
+
+            foreach (var requestItem in request.BeerRequests)
+            {
+                var requestedItemInStock = wholesalerStock.FirstOrDefault(stockItem => stockItem.Beer.Id.Equals(requestItem.BeerId));
+
+                if (requestedItemInStock is null)
+                    throw new HttpException(HttpStatusCode.BadRequest, "Requested Item is not sold by this wholesaler");
+                if (requestedItemInStock.Quantity < requestItem.Quantity)
+                    throw new HttpException(HttpStatusCode.BadRequest, $"Requested quantity for item {requestItem.BeerId} is not available at this wholesaler");
+            }
+        }
+
+        #endregion
+
+
     }
 }
