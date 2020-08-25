@@ -11,7 +11,7 @@ namespace Domain.Extensions
             return new Brewery
             {
                 Id = entity.Id,
-                Name = entity.Name,
+                Name = entity.Name
             };
         }
 

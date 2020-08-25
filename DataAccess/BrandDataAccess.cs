@@ -33,6 +33,7 @@ namespace DataAccess
         {
             return await _context.Beer.Where(beer => beer.BreweryId.Equals(breweryId) &&
                  beer.IsObsolete == false)
+                .Include(beer => beer.Brewery)
                 .ToArrayAsync();
         }
 

@@ -13,7 +13,6 @@ namespace Domain.Extensions
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                IsObsolete = entity.IsObsolete,
                 Brewery = entity.Brewery.ToModel()
             };
         }
@@ -29,7 +28,7 @@ namespace Domain.Extensions
             {
                 Id = model.Id,
                 Name = model.Name,
-                IsObsolete = model.IsObsolete,
+                IsObsolete = false,
                 BreweryId = model.Brewery?.Id ?? Guid.Empty
             };
         }
