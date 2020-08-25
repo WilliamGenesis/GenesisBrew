@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Domain.Entities
 {
@@ -8,6 +7,6 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public BeerEntity[] Beers { get; set; }
+        public ICollection<BeerEntity> Beers { get; set; }
     }
 }

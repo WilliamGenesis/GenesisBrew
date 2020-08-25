@@ -1,13 +1,15 @@
 using Application.Services;
 using Application.Validation;
 using DataAccess;
+using DataAccess.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace GenesisBrewery2
+namespace GenesisBrew
 {
     public class Startup
     {
@@ -24,6 +26,7 @@ namespace GenesisBrewery2
             services.AddControllers();
             ConfigureApplication(services);
             ConfigureDataAccess(services);
+            ConfigureContext(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +47,12 @@ namespace GenesisBrewery2
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void ConfigureContext(IServiceCollection services)
+        {
+            services.AddDbContext<GenesisBrewContext>(options =>
+                options.UseSqlServer(@"Server=(localdb)\\mssqllocaldb;Database=GenesisBrew;Trusted_Connection=True;MultipleActiveResultSets=true"));
         }
 
         private void ConfigureApplication(IServiceCollection services)

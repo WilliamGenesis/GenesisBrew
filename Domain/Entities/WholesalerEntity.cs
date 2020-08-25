@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -7,6 +8,6 @@ namespace Domain.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public BeerStockItemEntity[] StockItems;
+        public ICollection<BeerStockItemEntity> StockItems;
     }
 }
