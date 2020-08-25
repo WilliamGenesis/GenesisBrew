@@ -1,4 +1,4 @@
-﻿using Domain.Models;
+﻿using Domain.Entities;
 using System;
 using System.Threading.Tasks;
 
@@ -6,12 +6,12 @@ namespace DataAccess
 {
     public interface IWholesalerDataAccess
     {
-        Task<Wholesaler[]> GetWholesalers();
-        Task<Wholesaler> GetWholesaler(Guid id);
-        Task<BeerStockItem> GetBeerStockItem(Guid id);
-        Task<BeerStockItem[]> GetWholesalerStock(Guid wholesalerId);
-        Task<Wholesaler[]> GetWholesalersByBeerId(Guid itemId);
-        Task<Guid> CreateStockItem(BeerStockItem item);
-        Task<Guid> UpdateStockItem(BeerStockItem item);
+        Task<WholesalerEntity[]> GetWholesalers();
+        Task<WholesalerEntity> GetWholesaler(Guid id);
+        Task<BeerStockItemEntity> GetBeerStockItem(Guid id);
+        Task<BeerStockItemEntity[]> GetWholesalerStock(Guid wholesalerId);
+        Task<WholesalerEntity[]> GetWholesalersByBeerId(Guid itemId);
+        Task<Guid> CreateStockItem(BeerStockItemEntity item);
+        Task<Guid> UpdateStockItem(BeerStockItemEntity item);
     }
 }

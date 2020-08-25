@@ -1,5 +1,6 @@
 ﻿using Application.Validation;
 using DataAccess;
+using Domain.Extensions;
 using Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace Application.Services
         {
             await _wholesalerValidation.ValidateBeerStockItem(item);
 
-            return await _wholesalerDataAccess.CreateStockItem(item);
+            return await _wholesalerDataAccess.CreateStockItem(item.ToEntity());
         }
 
         public async Task<Quote> GenerateQuote(QuoteRequest request)
@@ -33,7 +34,7 @@ namespace Application.Services
             var quote = new Quote
             {
                 WholesalerId = request.WholesalerId,
-                QuotedItems = GetQuotedItems(request, wholesalerStock),
+                QuotedItems = GetQuotedItems(request, wholesalerStock.ToModels()),
             };
             quote.RawPrice = quote.QuotedItems.Sum(item => item.UnitPrice * item.Quantity);
             quote.Discount = GetDiscount(quote.RawPrice, quote.QuotedItems.Sum(item => item.Quantity));
@@ -42,19 +43,25 @@ namespace Application.Services
             return quote;
         }
 
-        public Task<Wholesaler[]> GetWholesalers()
+        public async Task<Wholesaler[]> GetWholesalers()
         {
-            return _wholesalerDataAccess.GetWholesalers();
+            var wholesalers = await _wholesalerDataAccess.GetWholesalers();
+
+            return wholesalers.ToModels();
         }
 
         public async Task<Wholesaler[]> GetWholesalersByBeerId(Guid beerId)
         {
-            return await _wholesalerDataAccess.GetWholesalersByBeerId(beerId);
+            var wholesalers = await _wholesalerDataAccess.GetWholesalersByBeerId(beerId);
+
+            return wholesalers.ToModels();
         }
 
         public async Task<BeerStockItem[]> GetWholesalerStock(Guid wholesalerId)
         {
-            return await _wholesalerDataAccess.GetWholesalerStock(wholesalerId);
+            var beerStockItems = await _wholesalerDataAccess.GetWholesalerStock(wholesalerId);
+
+            return beerStockItems.ToModels();
         }
 
         public async Task<Guid> UpdateStockItem(BeerStockItem item)
@@ -62,7 +69,7 @@ namespace Application.Services
             await _wholesalerValidation.ValidateBeerStockItemExist(item.Id);
             await _wholesalerValidation.ValidateBeerStockItem(item);
 
-            return await _wholesalerDataAccess.UpdateStockItem(item);
+            return await _wholesalerDataAccess.UpdateStockItem(item.ToEntity());
         }
 
         private BeerStockItem[] GetQuotedItems(QuoteRequest request, BeerStockItem[] wholesalerStock)

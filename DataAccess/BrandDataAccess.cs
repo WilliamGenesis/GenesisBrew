@@ -1,4 +1,4 @@
-﻿using Domain.Models;
+﻿using Domain.Entities;
 using System;
 using System.Threading.Tasks;
 
@@ -6,27 +6,27 @@ namespace DataAccess
 {
     public class BrandDataAccess : IBrandDataAccess
     {
-        public Task<Guid> CreateBeer(Beer beer)
+        public Task<Guid> CreateBeer(BeerEntity beer)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Beer> GetBeer(Guid id)
+        public Task<BeerEntity> GetBeer(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Beer[]> GetBeers(Guid BreweryId)
+        public Task<BeerEntity[]> GetBeers(Guid BreweryId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Brewery[]> GetBreweries()
+        public Task<BreweryEntity[]> GetBreweries()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Brewery> GetBrewery(Guid id)
+        public Task<BreweryEntity> GetBrewery(Guid id)
         {
             throw new NotImplementedException();
         }

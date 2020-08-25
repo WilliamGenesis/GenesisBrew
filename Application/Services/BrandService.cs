@@ -1,5 +1,6 @@
 ﻿using Application.Validation;
 using DataAccess;
+using Domain.Extensions;
 using Domain.Models;
 using System;
 using System.Threading.Tasks;
@@ -20,17 +21,21 @@ namespace Application.Services
         {
             await _brandValidation.ValidateBeer(beer);
 
-            return await _brandDataAccess.CreateBeer(beer);
+            return await _brandDataAccess.CreateBeer(beer.ToEntity());
         }
 
         public async Task<Beer[]> GetBeers(Guid breweryId)
         {
-            return await _brandDataAccess.GetBeers(breweryId);
+            var beers = await _brandDataAccess.GetBeers(breweryId);
+
+            return beers.ToModels();
         }
 
         public async Task<Brewery[]> GetBreweries()
         {
-            return await _brandDataAccess.GetBreweries();
+            var breweries = await _brandDataAccess.GetBreweries();
+
+            return breweries.ToModels();
         }
 
         public async Task<Guid> MarkBeerAsObsolete(Guid beerId)
