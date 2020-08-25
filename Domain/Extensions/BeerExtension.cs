@@ -13,7 +13,7 @@ namespace Domain.Extensions
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                Brewery = entity.Brewery.ToModel()
+                Brewery = entity.Brewery?.ToModel()
             };
         }
 
