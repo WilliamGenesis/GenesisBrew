@@ -37,7 +37,7 @@ namespace GenesisBrew.Middleware
 			if (e.GetType() == typeof(HttpException))
             {
 				var httpException = (HttpException)e;
-				return (int)httpException.StatusCode.GetTypeCode();
+				return (int)httpException.StatusCode;
 
 			}
 			return 500;

@@ -1,44 +1,73 @@
-﻿using Domain.Entities;
+﻿using DataAccess.Context;
+using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DataAccess
 {
     public class WholesalerDataAccess : IWholesalerDataAccess
     {
-        public Task<Guid> CreateStockItem(BeerStockItemEntity item)
+        private GenesisBrewContext _context;
+        public WholesalerDataAccess(GenesisBrewContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<BeerStockItemEntity> GetBeerStockItem(Guid id)
+        public async Task<Guid> CreateBeerStockItem(BeerStockItemEntity item)
         {
-            throw new NotImplementedException();
+            var newBeerStockItem = await _context.StockItem.AddAsync(item);
+
+            await _context.SaveChangesAsync();
+
+            return newBeerStockItem.Entity.Id;
         }
 
-        public Task<WholesalerEntity> GetWholesaler(Guid id)
+        public async Task<BeerStockItemEntity> GetBeerStockItem(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.StockItem.Include(item => item.Wholesaler)
+                .FirstOrDefaultAsync(item => item.Id.Equals(id));
         }
 
-        public Task<WholesalerEntity[]> GetWholesalers()
+        public async Task<WholesalerEntity> GetWholesaler(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Wholesaler.FirstOrDefaultAsync(wholesaler => wholesaler.Id.Equals(id));
         }
 
-        public Task<WholesalerEntity[]> GetWholesalersByBeerId(Guid itemId)
+        public async Task<WholesalerEntity[]> GetWholesalers()
         {
-            throw new NotImplementedException();
+            return await _context.Wholesaler.ToArrayAsync();
         }
 
-        public Task<BeerStockItemEntity[]> GetWholesalerStock(Guid wholesalerId)
+        public async Task<WholesalerEntity[]> GetWholesalersByBeerId(Guid itemId)
         {
-            throw new NotImplementedException();
+            return await _context.Wholesaler.Include(wholesaler => wholesaler.BeerStockItems)
+                .Where(wholesaler => wholesaler.BeerStockItems.Select(item => item.Id).Contains(itemId))
+                .ToArrayAsync();
         }
 
-        public Task<Guid> UpdateStockItem(BeerStockItemEntity item)
+        public async Task<BeerStockItemEntity[]> GetWholesalerStock(Guid wholesalerId)
         {
-            throw new NotImplementedException();
+            return await _context.StockItem.Include(item => item.Wholesaler)
+                .Include(item => item.Beer)
+                .ThenInclude(beer => beer.Brewery)
+                .Where(item => item.WholesalerId.Equals(wholesalerId))
+                .ToArrayAsync();
+        }
+
+        public async Task<Guid> UpdateStockItem(BeerStockItemEntity beerStockItem)
+        {
+            var beerStockItemToUpdate = await _context.StockItem.FirstOrDefaultAsync(item => item.Id.Equals(beerStockItem.Id));
+
+            beerStockItemToUpdate.Quantity = beerStockItem.Quantity;
+            beerStockItemToUpdate.UnitPrice = beerStockItem.UnitPrice;
+            beerStockItemToUpdate.WholesalerId = beerStockItem.WholesalerId;
+            beerStockItemToUpdate.BeerId = beerStockItem.BeerId;
+
+            await _context.SaveChangesAsync();
+
+            return beerStockItem.Id;
         }
     }
 }

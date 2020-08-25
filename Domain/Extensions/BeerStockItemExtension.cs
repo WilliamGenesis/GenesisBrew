@@ -15,7 +15,7 @@ namespace Domain.Extensions
                 Beer = entity.Beer.ToModel(),
                 Quantity = entity.Quantity,
                 UnitPrice = entity.UnitPrice,
-                //Wholesaler = entity.Wholesaler.ToModel()
+                Wholesaler = entity.Wholesaler.ToModel()
             };
         }
 
@@ -28,11 +28,11 @@ namespace Domain.Extensions
         {
             return new BeerStockItemEntity
             {
-                Beer = model.Beer.ToEntity(),
+                Id = model.Id,
+                BeerId = model.Beer?.Id ?? Guid.Empty,
                 Quantity = model.Quantity,
                 UnitPrice = model.UnitPrice,
                 WholesalerId = model.Wholesaler?.Id ?? Guid.Empty
-                //Wholesaler = entity.Wholesaler.ToModel()
             };
         }
 

@@ -22,7 +22,7 @@ namespace Application.Services
         {
             await _wholesalerValidation.ValidateBeerStockItem(item);
 
-            return await _wholesalerDataAccess.CreateStockItem(item.ToEntity());
+            return await _wholesalerDataAccess.CreateBeerStockItem(item.ToEntity());
         }
 
         public async Task<Quote> GenerateQuote(QuoteRequest request)
