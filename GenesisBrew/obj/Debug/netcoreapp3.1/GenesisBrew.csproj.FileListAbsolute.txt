@@ -1,0 +1,6 @@
+C:\Users\Administrateur\source\repos\GenesisBrew\GenesisBrew\bin\Debug\netcoreapp3.1\Application.dll
+C:\Users\Administrateur\source\repos\GenesisBrew\GenesisBrew\bin\Debug\netcoreapp3.1\Domain.dll
+C:\Users\Administrateur\source\repos\GenesisBrew\GenesisBrew\obj\Debug\netcoreapp3.1\GenesisBrew.csprojAssemblyReference.cache
+C:\Users\Administrateur\source\repos\GenesisBrew\GenesisBrew\obj\Debug\netcoreapp3.1\GenesisBrew.AssemblyInfoInputs.cache
+C:\Users\Administrateur\source\repos\GenesisBrew\GenesisBrew\obj\Debug\netcoreapp3.1\GenesisBrew.AssemblyInfo.cs
+C:\Users\Administrateur\source\repos\GenesisBrew\GenesisBrew\obj\Debug\netcoreapp3.1\GenesisBrew.RazorTargetAssemblyInfo.cache

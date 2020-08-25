@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "hZxq5EFVB2Yd4RQVuMWbFGbPXz0JcYD9jqATv/tnd+cvV/GUTG2CUhE+t7vGbAb7UYS45Sqv4GVhHb3dSv8WOw==",
+  "dgSpecHash": "BKC8kXBMU2p28rYMWRK4l2EsA5EjEc9EJSJXl7b95k3XyHwfkV5ZIvOUt4pPt4araO1ydc0b+/fbWVl9oUBPFA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrateur\\source\\repos\\GenesisBrew\\GenesisBrew\\GenesisBrew.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrateur\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

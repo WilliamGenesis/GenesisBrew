@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenesisBrew", "GenesisBrewery2\GenesisBrew.csproj", "{5DB97136-9F05-4AEB-96BB-593D13AC6B18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{78065C2C-D984-4332-9063-C8009BC17FD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{78065C2C-D984-4332-9063-C8009BC17FD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{1E084F1D-3AC0-46DE-8F44-C7AC878EC93F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1E084F1D-3AC0-46DE-8F44-C7AC878EC93F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{F624FC32-068B-4B6B-961C-4225B5BF9D24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{F624FC32-068B-4B6B-961C-4225B5BF9D24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenesisBrew", "GenesisBrew\GenesisBrew.csproj", "{EFCF1898-2855-4310-A17D-19DB530A11EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5DB97136-9F05-4AEB-96BB-593D13AC6B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DB97136-9F05-4AEB-96BB-593D13AC6B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DB97136-9F05-4AEB-96BB-593D13AC6B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DB97136-9F05-4AEB-96BB-593D13AC6B18}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78065C2C-D984-4332-9063-C8009BC17FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78065C2C-D984-4332-9063-C8009BC17FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78065C2C-D984-4332-9063-C8009BC17FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{F624FC32-068B-4B6B-961C-4225B5BF9D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F624FC32-068B-4B6B-961C-4225B5BF9D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F624FC32-068B-4B6B-961C-4225B5BF9D24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFCF1898-2855-4310-A17D-19DB530A11EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCF1898-2855-4310-A17D-19DB530A11EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFCF1898-2855-4310-A17D-19DB530A11EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCF1898-2855-4310-A17D-19DB530A11EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
