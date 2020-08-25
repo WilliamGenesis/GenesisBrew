@@ -35,8 +35,6 @@ namespace Application.Validation
         public async Task ValidateBeerStockItem(BeerStockItem item)
         {
             await ValidateWholesalerExists(item.Wholesaler?.Id ?? Guid.Empty);
-            ValidateBeerStockItemPrice(item.UnitPrice);
-            ValidateBeerStockItemQuantity(item.Quantity);
         }
 
         public async Task ValidateWholesalerExists(Guid id)
@@ -46,23 +44,6 @@ namespace Application.Validation
             if(wholesaler is null)
                 throw new HttpException(HttpStatusCode.BadRequest, "The wholesaler does not exist");
         }
-
-        #region Beer Stock Item Validation
-
-
-        private void ValidateBeerStockItemPrice(float price)
-        {
-            if( price < 0)
-                throw new HttpException(HttpStatusCode.BadRequest, "The price of a stock item cannot be negative");
-        }
-
-        private void ValidateBeerStockItemQuantity(int quantity)
-        {
-            if( quantity < 0)
-                throw new HttpException(HttpStatusCode.BadRequest, "The quantity of a stock item cannot be negative");
-        }
-
-        #endregion
 
         #region Quote Request Validation
 
