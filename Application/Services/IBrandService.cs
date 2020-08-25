@@ -9,6 +9,6 @@ namespace Application.Services
         Task<Brewery[]> GetBreweries();
         Task<Beer[]> GetBeers(Guid breweryId);
         Task<Guid> CreateBeer(Beer beer);
-        Task<bool> MarkBeerAsObsolete(Guid beerId);
+        Task<Guid> MarkBeerAsObsolete(Guid beerId);
     }
 }

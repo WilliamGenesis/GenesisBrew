@@ -4,7 +4,6 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Domain.Exceptions;
-using System.Net;
 
 namespace GenesisBrew.Middleware
 {
@@ -52,5 +51,4 @@ namespace GenesisBrew.Middleware
 			return builder.UseMiddleware<ErrorHandlingMiddleware>();
 		}
 	}
-}
 }

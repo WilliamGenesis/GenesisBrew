@@ -1,4 +1,6 @@
-﻿using Domain.Models;
+﻿using Application.Validation;
+using DataAccess;
+using Domain.Models;
 using System;
 using System.Threading.Tasks;
 
@@ -6,24 +8,36 @@ namespace Application.Services
 {
     public class BrandService : IBrandService
     {
-        public Task<Guid> CreateBeer(Beer beer)
+        private readonly IBrandDataAccess _brandDataAccess;
+        private readonly IBrandValidation _brandValidation;
+        public BrandService(IBrandDataAccess brandDataAccess, IBrandValidation brandValidation)
         {
-            throw new NotImplementedException();
+            _brandDataAccess = brandDataAccess;
+            _brandValidation = brandValidation;
         }
 
-        public Task<Beer[]> GetBeers(Guid breweryId)
+        public async Task<Guid> CreateBeer(Beer beer)
         {
-            throw new NotImplementedException();
+            await _brandValidation.ValidateBeer(beer);
+
+            return await _brandDataAccess.CreateBeer(beer);
         }
 
-        public Task<Brewery[]> GetBreweries()
+        public async Task<Beer[]> GetBeers(Guid breweryId)
         {
-            throw new NotImplementedException();
+            return await _brandDataAccess.GetBeers(breweryId);
         }
 
-        public Task<bool> MarkBeerAsObsolete(Guid beerId)
+        public async Task<Brewery[]> GetBreweries()
         {
-            throw new NotImplementedException();
+            return await _brandDataAccess.GetBreweries();
+        }
+
+        public async Task<Guid> MarkBeerAsObsolete(Guid beerId)
+        {
+            await _brandValidation.ValidateBeerExists(beerId);
+
+            return await _brandDataAccess.MarkBeerAsObsolete(beerId);
         }
     }
 }

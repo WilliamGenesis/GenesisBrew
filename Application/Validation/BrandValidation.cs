@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Validation
 {
-    public class BrandValidation
+    public class BrandValidation : IBrandValidation
     {
         private readonly IBrandDataAccess _brandDataAccess;
 
@@ -19,6 +19,14 @@ namespace Application.Validation
         public async Task ValidateBeer(Beer beer)
         {
             await ValidateBeerBrewery(beer.Brewery.Id);
+        }
+
+        public async Task ValidateBeerExists(Guid beerId)
+        {
+            var beer = await _brandDataAccess.GetBeer(beerId);
+
+            if (beer is null)
+                throw new HttpException(HttpStatusCode.NotFound, "The beer does not exist");
         }
 
         private async Task ValidateBeerBrewery(Guid breweryId)
